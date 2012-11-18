@@ -79,6 +79,8 @@ endif
 
 endif
 else ifeq ($(SYSTEM), osx)
-	@echo "Haha"
+	@echo "OSX"
+else ifeq ($(SYSTEM), win)
+	@echo "Windows"
 endif
 
