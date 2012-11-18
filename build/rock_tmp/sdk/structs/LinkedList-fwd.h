@@ -1,0 +1,110 @@
+/* structs/LinkedList header-forward file, generated with rock, the ooc compiler written in ooc */
+
+#ifndef ___structs_LinkedList_fwd___
+#define ___structs_LinkedList_fwd___
+
+struct _structs_LinkedList__LinkedList;
+typedef struct _structs_LinkedList__LinkedList structs_LinkedList__LinkedList;
+struct _structs_LinkedList__Node;
+typedef struct _structs_LinkedList__Node structs_LinkedList__Node;
+struct _structs_LinkedList__LinkedListIterator;
+typedef struct _structs_LinkedList__LinkedListIterator structs_LinkedList__LinkedListIterator;
+struct _structs_LinkedList__LinkedListClass;
+typedef struct _structs_LinkedList__LinkedListClass structs_LinkedList__LinkedListClass;
+struct _structs_LinkedList__NodeClass;
+typedef struct _structs_LinkedList__NodeClass structs_LinkedList__NodeClass;
+struct _structs_LinkedList__LinkedListIteratorClass;
+typedef struct _structs_LinkedList__LinkedListIteratorClass structs_LinkedList__LinkedListIteratorClass;
+
+#include <sdk/lang/Exception-fwd.h>
+#include <sdk/lang/BufferIterator-fwd.h>
+#include <sdk/lang/System-fwd.h>
+#include <sdk/lang/Character-fwd.h>
+#include <sdk/lang/VarArgs-fwd.h>
+#include <sdk/lang/types-fwd.h>
+#include <sdk/lang/Iterators-fwd.h>
+#include <sdk/lang/Memory-fwd.h>
+#include <sdk/lang/String-fwd.h>
+#include <sdk/lang/Buffer-fwd.h>
+#include <sdk/lang/Numbers-fwd.h>
+#include <sdk/lang/Abstractions-fwd.h>
+#include <sdk/lang/Format-fwd.h>
+#include <sdk/lang/IO-fwd.h>
+#include <sdk/structs/List-fwd.h>
+#include <sdk/os/Terminal-fwd.h>
+structs_LinkedList__LinkedListClass *structs_LinkedList__LinkedList_class();
+structs_LinkedList__LinkedList* structs_LinkedList__LinkedList_new(lang_types__Class* T);
+void structs_LinkedList__LinkedList_init(structs_LinkedList__LinkedList* this);
+void structs_LinkedList__LinkedList_add(structs_LinkedList__LinkedList* this, uint8_t* data);
+void structs_LinkedList__LinkedList_add_impl(structs_LinkedList__LinkedList* this, uint8_t* data);
+void structs_LinkedList__LinkedList_add_withIndex(structs_LinkedList__LinkedList* this, lang_Numbers__SSizeT index, uint8_t* data);
+void structs_LinkedList__LinkedList_add_withIndex_impl(structs_LinkedList__LinkedList* this, lang_Numbers__SSizeT index, uint8_t* data);
+void structs_LinkedList__LinkedList_get(structs_LinkedList__LinkedList* this, uint8_t* __genericReturn105, lang_Numbers__SSizeT index);
+void structs_LinkedList__LinkedList_get_impl(structs_LinkedList__LinkedList* this, uint8_t* __genericReturn105, lang_Numbers__SSizeT index);
+structs_LinkedList__Node* structs_LinkedList__LinkedList_getNode(structs_LinkedList__LinkedList* this, lang_Numbers__SSizeT index);
+structs_LinkedList__Node* structs_LinkedList__LinkedList_getNode_impl(structs_LinkedList__LinkedList* this, lang_Numbers__SSizeT index);
+void structs_LinkedList__LinkedList_clear(structs_LinkedList__LinkedList* this);
+void structs_LinkedList__LinkedList_clear_impl(structs_LinkedList__LinkedList* this);
+lang_Numbers__SSizeT structs_LinkedList__LinkedList_indexOf(structs_LinkedList__LinkedList* this, uint8_t* data);
+lang_Numbers__SSizeT structs_LinkedList__LinkedList_indexOf_impl(structs_LinkedList__LinkedList* this, uint8_t* data);
+lang_Numbers__SSizeT structs_LinkedList__LinkedList_lastIndexOf(structs_LinkedList__LinkedList* this, uint8_t* data);
+lang_Numbers__SSizeT structs_LinkedList__LinkedList_lastIndexOf_impl(structs_LinkedList__LinkedList* this, uint8_t* data);
+void structs_LinkedList__LinkedList_first(structs_LinkedList__LinkedList* this, uint8_t* __genericReturn108);
+void structs_LinkedList__LinkedList_first_impl(structs_LinkedList__LinkedList* this, uint8_t* __genericReturn108);
+void structs_LinkedList__LinkedList_last(structs_LinkedList__LinkedList* this, uint8_t* __genericReturn109);
+void structs_LinkedList__LinkedList_last_impl(structs_LinkedList__LinkedList* this, uint8_t* __genericReturn109);
+void structs_LinkedList__LinkedList_removeAt(structs_LinkedList__LinkedList* this, uint8_t* __genericReturn110, lang_Numbers__SSizeT index);
+void structs_LinkedList__LinkedList_removeAt_impl(structs_LinkedList__LinkedList* this, uint8_t* __genericReturn110, lang_Numbers__SSizeT index);
+lang_types__Bool structs_LinkedList__LinkedList_remove(structs_LinkedList__LinkedList* this, uint8_t* data);
+lang_types__Bool structs_LinkedList__LinkedList_remove_impl(structs_LinkedList__LinkedList* this, uint8_t* data);
+void structs_LinkedList__LinkedList_removeNode(structs_LinkedList__LinkedList* this, structs_LinkedList__Node* toRemove);
+void structs_LinkedList__LinkedList_removeNode_impl(structs_LinkedList__LinkedList* this, structs_LinkedList__Node* toRemove);
+lang_types__Bool structs_LinkedList__LinkedList_removeLast(structs_LinkedList__LinkedList* this);
+lang_types__Bool structs_LinkedList__LinkedList_removeLast_impl(structs_LinkedList__LinkedList* this);
+void structs_LinkedList__LinkedList_set(structs_LinkedList__LinkedList* this, uint8_t* __genericReturn113, lang_Numbers__SSizeT index, uint8_t* data);
+void structs_LinkedList__LinkedList_set_impl(structs_LinkedList__LinkedList* this, uint8_t* __genericReturn113, lang_Numbers__SSizeT index, uint8_t* data);
+lang_Numbers__SSizeT structs_LinkedList__LinkedList_getSize(structs_LinkedList__LinkedList* this);
+lang_Numbers__SSizeT structs_LinkedList__LinkedList_getSize_impl(structs_LinkedList__LinkedList* this);
+structs_LinkedList__LinkedListIterator* structs_LinkedList__LinkedList_iterator(structs_LinkedList__LinkedList* this);
+structs_LinkedList__LinkedListIterator* structs_LinkedList__LinkedList_iterator_impl(structs_LinkedList__LinkedList* this);
+structs_LinkedList__LinkedListIterator* structs_LinkedList__LinkedList_backIterator(structs_LinkedList__LinkedList* this);
+structs_LinkedList__LinkedListIterator* structs_LinkedList__LinkedList_backIterator_impl(structs_LinkedList__LinkedList* this);
+structs_LinkedList__LinkedList* structs_LinkedList__LinkedList_clone(structs_LinkedList__LinkedList* this);
+structs_LinkedList__LinkedList* structs_LinkedList__LinkedList_clone_impl(structs_LinkedList__LinkedList* this);
+structs_LinkedList__LinkedList* structs_LinkedList__LinkedList_emptyClone(structs_LinkedList__LinkedList* this, lang_types__Class* K);
+structs_LinkedList__LinkedList* structs_LinkedList__LinkedList_emptyClone_impl(structs_LinkedList__LinkedList* this, lang_types__Class* K);
+lang_Numbers__SizeT structs_LinkedList__LinkedList___getsize__(structs_LinkedList__LinkedList* this);
+lang_Numbers__SizeT structs_LinkedList__LinkedList___getsize___impl(structs_LinkedList__LinkedList* this);
+void structs_LinkedList__LinkedList___defaults__(structs_LinkedList__LinkedList* this);
+void structs_LinkedList__LinkedList___defaults___impl(structs_LinkedList__LinkedList* this);
+void structs_LinkedList__LinkedList___load__();
+structs_LinkedList__NodeClass *structs_LinkedList__Node_class();
+structs_LinkedList__Node* structs_LinkedList__Node_new(lang_types__Class* T);
+void structs_LinkedList__Node_init(structs_LinkedList__Node* this);
+structs_LinkedList__Node* structs_LinkedList__Node_new_withParams(lang_types__Class* T, structs_LinkedList__Node* prev, structs_LinkedList__Node* next, uint8_t* data);
+void structs_LinkedList__Node_init_withParams(structs_LinkedList__Node* this, structs_LinkedList__Node* prev, structs_LinkedList__Node* next, uint8_t* data);
+void structs_LinkedList__Node___defaults__(structs_LinkedList__Node* this);
+void structs_LinkedList__Node___defaults___impl(structs_LinkedList__Node* this);
+void structs_LinkedList__Node___load__();
+structs_LinkedList__LinkedListIteratorClass *structs_LinkedList__LinkedListIterator_class();
+structs_LinkedList__LinkedListIterator* structs_LinkedList__LinkedListIterator_new_ll(lang_types__Class* T, structs_LinkedList__LinkedList* list);
+void structs_LinkedList__LinkedListIterator_init_ll(structs_LinkedList__LinkedListIterator* this, structs_LinkedList__LinkedList* list);
+lang_types__Bool structs_LinkedList__LinkedListIterator_hasNext__quest(structs_LinkedList__LinkedListIterator* this);
+lang_types__Bool structs_LinkedList__LinkedListIterator_hasNext__quest_impl(structs_LinkedList__LinkedListIterator* this);
+void structs_LinkedList__LinkedListIterator_next(structs_LinkedList__LinkedListIterator* this, uint8_t* __genericReturn114);
+void structs_LinkedList__LinkedListIterator_next_impl(structs_LinkedList__LinkedListIterator* this, uint8_t* __genericReturn114);
+lang_types__Bool structs_LinkedList__LinkedListIterator_hasPrev__quest(structs_LinkedList__LinkedListIterator* this);
+lang_types__Bool structs_LinkedList__LinkedListIterator_hasPrev__quest_impl(structs_LinkedList__LinkedListIterator* this);
+void structs_LinkedList__LinkedListIterator_prev(structs_LinkedList__LinkedListIterator* this, uint8_t* __genericReturn115);
+void structs_LinkedList__LinkedListIterator_prev_impl(structs_LinkedList__LinkedListIterator* this, uint8_t* __genericReturn115);
+lang_types__Bool structs_LinkedList__LinkedListIterator_remove(structs_LinkedList__LinkedListIterator* this);
+lang_types__Bool structs_LinkedList__LinkedListIterator_remove_impl(structs_LinkedList__LinkedListIterator* this);
+void structs_LinkedList__LinkedListIterator___defaults__(structs_LinkedList__LinkedListIterator* this);
+void structs_LinkedList__LinkedListIterator___defaults___impl(structs_LinkedList__LinkedListIterator* this);
+void structs_LinkedList__LinkedListIterator___load__();
+void structs_LinkedList_load();
+#define structs_LinkedList__getchar getchar
+
+void structs_LinkedList____OP_IDX_LinkedList_Int__T(uint8_t* __genericReturn102, lang_types__Class* T, structs_LinkedList__LinkedList* list, lang_Numbers__Int index);
+
+#endif // ___structs_LinkedList_fwd___
