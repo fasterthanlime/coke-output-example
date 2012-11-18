@@ -50,24 +50,32 @@ ifeq ($(SYSTEM), linux)
 ifeq ($(DISTRIB), Ubuntu)
 
 # APT tests
-OPENSSL_INSTALLED := "$(shell dpkg -s libcurl4-openssl-dev 2> /dev/null)"
-GNUTLS_INSTALLED := "$(shell dpkg -s libcurl4-gnutls-dev 2> /dev/null)"
+OPENSSL_INSTALLED:=$(shell utils/apt-status.sh libcurl4-openssl-dev)
+GNUTLS_INSTALLED:=$(shell utils/apt-status.sh libcurl4-gnutls-dev)
 APT_PACKAGES:=
 
 setup:
 	@echo "Compiling for target platform: $(PLATFORM)"
 
 # APT actions
-ifeq ($(OPENSSL_INSTALLED), "")
+ifeq ($(OPENSSL_INSTALLED), NOT_INSTALLED)
 	@echo "Checking for libcurl4-openssl-dev... no"
-	$(eval APT_PACKAGES += libcurl4-openssl-dev)
+	$(eval APT_PACKAGES+=libcurl4-openssl-dev)
+else ifeq ($(OPENSSL_INSTALED), ERROR)
+	@echo "[ERROR] Invalid APT package: libcurl4-openssl-dev"
+	@echo "Please report the issue to https://github.com/nddrylliog/coke/issues"
+	@exit 1
 else
 	@echo "Checking for libcurl4-openssl-dev... yes"
 endif
 
-ifeq ($(GNUTLS_INSTALLED), "")
+ifeq ($(GNUTLS_INSTALLED), NOT_INSTALLED)
 	@echo "Checking for libcurl4-gnutls-dev... no"
-	$(eval APT_PACKAGES += libcurl4-gnutls-dev)
+	$(eval APT_PACKAGES+=libcurl4-gnutls-dev)
+else ifeq ($(GNUTLS_INSTALED), ERROR)
+	@echo "[ERROR] Invalid APT package: libcurl4-gnutls-dev"
+	@echo "Please report the issue to https://github.com/nddrylliog/coke/issues"
+	@exit 1
 else
 	@echo "Checking for libcurl4-gnutls-dev... yes"
 endif
