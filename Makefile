@@ -25,22 +25,21 @@ else ifeq ($(MYOS),)
   ifeq (${OS}, Windows_NT)
     SYSTEM=win
   else
-    $(error "OS ${MYOS} doesn't have pre-built Boehm GC packages. Please compile and install your own and recompile with GC_PATH=-lgc")
+    $(error "OS $(MYOS) doesn't have pre-built Boehm GC packages. Please compile and install your own and recompile with GC_PATH=-lgc")
   endif
-endif
-ifneq ($(SYSTEM), osx)
-  ifeq ($(MACHINE), x86_64)
-    ARCH=64
-  else ifeq (${PROCESSOR_ARCHITECTURE}, AMD64)
-    ARCH=64
-  else
-    ARCH=32
-  endif
-  PLATFORM:=${SYSTEM}${ARCH}
 endif
 
+ifeq ($(MACHINE), x86_64)
+  ARCH=64
+else ifeq (${PROCESSOR_ARCHITECTURE}, AMD64)
+  ARCH=64
+else
+  ARCH=32
+endif
+PLATFORM=$(SYSTEM)$(ARCH)
+
 ifeq ($(SYSTEM), linux)
-    DISTRIB := $(shell lsb_release -is)
+    DISTRIB=$(shell lsb_release -is)
 endif
 	
 all:
@@ -71,7 +70,7 @@ else
 	@exit 1
 endif
 
-ifneq ($(APT_PACKAGES), "")
+ifneq ($(APT_PACKAGES), )
 	@echo "There are apt packages to install: [$(APT_PACKAGES)]"
 	sudo apt-get install $(APT_PACKAGES)
 endif
@@ -90,19 +89,21 @@ setup:
 
 # brew actions
 ifeq ($(CURL_INSTALLED), NOT_INSTALLED)
-	@echo "Checking for libcurl4-openssl-dev... no"
+	@echo "Checking for curl... no"
 	$(eval BREW_PACKAGES+=curl)
 else ifeq ($(CURL_INSTALLED), INSTALLED)
-	@echo "Checking for libcurl4-openssl-dev... yes"
+	@echo "Checking for curl... yes"
 else
 	@echo "[ERROR] Problem with brew package: curl"
 	@echo "Please report the issue to https://github.com/nddrylliog/coke/issues"
 	@exit 1
 endif
 
-ifneq ($(BREW_PACKAGES), "")
+ifneq ($(BREW_PACKAGES), )
 	@echo "There are brew packages to install: [$(BREW_PACKAGES)]"
-	brewget install $(BREW_PACKAGES)
+	@echo "Hit 'Enter' to continue or 'Ctrl-C' to cancel"
+	@read
+	brew install $(BREW_PACKAGES)
 endif
 
 	@make check
