@@ -46,48 +46,67 @@ endif
 all:
 	cd build && make
 
+check:
+	@echo "Checking the dependencies have been installed correctly..."
+
 ifeq ($(SYSTEM), linux)
 ifeq ($(DISTRIB), Ubuntu)
 
-# APT tests
-OPENSSL_INSTALLED:=$(shell utils/apt-status.sh libcurl4-openssl-dev)
-GNUTLS_INSTALLED:=$(shell utils/apt-status.sh libcurl4-gnutls-dev)
+# apt tests
+CURL_INSTALLED:=$(shell utils/apt-status.sh libcurl4-openssl-dev)
 APT_PACKAGES:=
 
 setup:
-	@echo "Compiling for target platform: $(PLATFORM)"
+	@echo "Installing deps for target platform: $(PLATFORM)"
 
-# APT actions
-ifeq ($(OPENSSL_INSTALLED), NOT_INSTALLED)
+# apt actions
+ifeq ($(CURL_INSTALLED), NOT_INSTALLED)
 	@echo "Checking for libcurl4-openssl-dev... no"
 	$(eval APT_PACKAGES+=libcurl4-openssl-dev)
-else ifeq ($(OPENSSL_INSTALED), ERROR)
-	@echo "[ERROR] Invalid APT package: libcurl4-openssl-dev"
-	@echo "Please report the issue to https://github.com/nddrylliog/coke/issues"
-	@exit 1
-else
+else ifeq ($(OPENSSL_INSTALED), INSTALLED)
 	@echo "Checking for libcurl4-openssl-dev... yes"
-endif
-
-ifeq ($(GNUTLS_INSTALLED), NOT_INSTALLED)
-	@echo "Checking for libcurl4-gnutls-dev... no"
-	$(eval APT_PACKAGES+=libcurl4-gnutls-dev)
-else ifeq ($(GNUTLS_INSTALED), ERROR)
-	@echo "[ERROR] Invalid APT package: libcurl4-gnutls-dev"
+else
+	@echo "[ERROR] Problem with apt package: libcurl4-openssl-dev"
 	@echo "Please report the issue to https://github.com/nddrylliog/coke/issues"
 	@exit 1
-else
-	@echo "Checking for libcurl4-gnutls-dev... yes"
 endif
 
 ifneq ($(APT_PACKAGES), "")
-	@echo "There are APT packages to install: [$(APT_PACKAGES)]"
+	@echo "There are apt packages to install: [$(APT_PACKAGES)]"
 	sudo apt-get install $(APT_PACKAGES)
 endif
 
 endif
+	@make check
+
 else ifeq ($(SYSTEM), osx)
-	@echo "OSX"
+
+# brew tests
+CURL_INSTALLED:=$(shell utils/brew-status.sh curl)
+BREW_PACKAGES:=
+
+setup:
+	@echo "Installing deps for target platform: $(PLATFORM)"
+
+# brew actions
+ifeq ($(CURL_INSTALLED), NOT_INSTALLED)
+	@echo "Checking for libcurl4-openssl-dev... no"
+	$(eval BREW_PACKAGES+=curl)
+else ifeq ($(CURL_INSTALLED), INSTALLED)
+	@echo "Checking for libcurl4-openssl-dev... yes"
+else
+	@echo "[ERROR] Problem with brew package: curl"
+	@echo "Please report the issue to https://github.com/nddrylliog/coke/issues"
+	@exit 1
+endif
+
+ifneq ($(BREW_PACKAGES), "")
+	@echo "There are brew packages to install: [$(BREW_PACKAGES)]"
+	brewget install $(BREW_PACKAGES)
+endif
+
+	@make check
+
 else ifeq ($(SYSTEM), win)
 	@echo "Windows"
 endif
