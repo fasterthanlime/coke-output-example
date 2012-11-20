@@ -61,8 +61,9 @@ setup:
 # apt actions
 ifeq ($(CURL_INSTALLED), NOT_INSTALLED)
 	@echo "Checking for libcurl4-openssl-dev... no"
-	$(eval APT_PACKAGES+=libcurl4-openssl-dev)
-else ifeq ($(OPENSSL_INSTALED), INSTALLED)
+	$(eval APT_PACKAGES += libcurl4-openssl-dev)
+	@echo "Now, APT_PACKAGES = [$(APT_PACKAGES)]"
+else ifeq ($(CURL_INSTALLED), INSTALLED)
 	@echo "Checking for libcurl4-openssl-dev... yes"
 else
 	@echo "[ERROR] Problem with apt package: libcurl4-openssl-dev"
@@ -70,8 +71,12 @@ else
 	@exit 1
 endif
 
-ifneq ($(APT_PACKAGES), )
+ifeq ($(APT_PACKAGES),)
+	@echo "[$(APT_PACKAGES)] equals an empty string"
+else
 	@echo "There are apt packages to install: [$(APT_PACKAGES)]"
+	@echo "Hit 'Enter' to continue or 'Ctrl-C' to cancel"
+	@read
 	sudo apt-get install $(APT_PACKAGES)
 endif
 
@@ -99,7 +104,7 @@ else
 	@exit 1
 endif
 
-ifneq ($(BREW_PACKAGES), )
+ifneq ($(BREW_PACKAGES),)
 	@echo "There are brew packages to install: [$(BREW_PACKAGES)]"
 	@echo "Hit 'Enter' to continue or 'Ctrl-C' to cancel"
 	@read
